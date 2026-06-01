@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Muyiwa Adeyemi — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0A0E1A;
+    --surface: #111827;
+    --surface2: #1A2235;
+    --accent: #3B82F6;
+    --accent2: #60A5FA;
+    --gold: #F59E0B;
+    --text: #F1F5F9;
+    --muted: #94A3B8;
+    --border: #1E2D42;
+    --radius: 12px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  .download-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--accent); color: white;
+    padding: 14px 28px; border-radius: 100px;
+    font-size: 14px; font-weight: 600; text-decoration: none;
+    transition: all 0.2s; letter-spacing: 0.3px;
+  }
+  .download-btn:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,130,246,0.3); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 48px;
+    background: rgba(10,14,26,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: var(--accent2); letter-spacing: -0.5px; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -100px; left: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-content { max-width: 780px; position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3);
+    color: var(--accent2); font-size: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 100px; margin-bottom: 24px;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+  h1 {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1.05; letter-spacing: -2px;
+    color: var(--text); margin-bottom: 20px;
+  }
+  h1 span { color: var(--accent); }
+  .hero-sub {
+    font-size: 18px; color: var(--muted); font-weight: 300;
+    max-width: 560px; margin-bottom: 40px; line-height: 1.8;
+  }
+  .hero-contacts { display: flex; flex-wrap: wrap; gap: 16px; }
+  .contact-pill {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--muted); padding: 10px 18px; border-radius: 100px;
+    font-size: 13px; text-decoration: none; transition: all 0.2s;
+  }
+  .contact-pill:hover { border-color: var(--accent); color: var(--text); }
+
+  /* ── SECTIONS ── */
+  section { padding: 80px 48px; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 12px;
+  }
+  h2 {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: clamp(28px, 4vw, 40px); letter-spacing: -1px;
+    color: var(--text); margin-bottom: 48px;
+  }
+
+  /* ── STATS ── */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-bottom: 80px; }
+  .stat-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 24px;
+    text-align: center; transition: border-color 0.2s;
+  }
+  .stat-card:hover { border-color: var(--accent); }
+  .stat-number { font-family: 'Syne', sans-serif; font-size: 40px; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 6px; }
+  .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── EXPERIENCE ── */
+  .exp-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 32px; margin-bottom: 24px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .exp-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+  .exp-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+  .exp-badge { background: rgba(59,130,246,0.1); color: var(--accent2); font-size: 11px; padding: 4px 12px; border-radius: 100px; font-weight: 500; white-space: nowrap; }
+  .exp-company { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+  .exp-group-title { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin: 16px 0 10px; }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .exp-bullets li { display: flex; gap: 10px; font-size: 14px; color: var(--muted); line-height: 1.6; }
+  .exp-bullets li::before { content: '→'; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+
+  /* ── SKILLS ── */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .skill-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px;
+    transition: border-color 0.2s;
+  }
+  .skill-card:hover { border-color: var(--accent); }
+  .skill-card-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  .skill-icon { font-size: 20px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag { background: var(--surface2); color: var(--muted); font-size: 12px; padding: 5px 12px; border-radius: 100px; border: 1px solid var(--border); }
+
+  /* ── PROJECTS ── */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .project-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px;
+    transition: all 0.2s;
+  }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .project-type { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
+  .project-name { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+  .project-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+  /* ── EDUCATION ── */
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .edu-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px;
+  }
+  .edu-degree { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .edu-school { font-size: 13px; color: var(--muted); }
+  .edu-year { font-size: 12px; color: var(--accent); margin-top: 8px; font-weight: 500; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 48px;
+    border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 13px;
+  }
+
+  /* ── FADE IN ── */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hero, section { padding-left: 20px; padding-right: 20px; }
+    h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">MA</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="about">
+  <div class="hero-content">
+    <div class="hero-tag">Available for new opportunities</div>
+    <h1>Muyiwa<br/><span>Adeyemi</span></h1>
+    <p class="hero-sub">Executive Assistant &amp; Tech Operations Specialist with hands-on experience deploying digital systems, building automations, and supporting executive operations across multiple business units.</p>
+    <div class="hero-contacts">
+      <a href="mailto:muyiwaadeyemim@gmail.com" class="contact-pill">📧 muyiwaadeyemim@gmail.com</a>
+      <a href="tel:07031174630" class="contact-pill">📞 07031174630</a>
+      <span class="contact-pill">📍 Lagos, Nigeria</span>
+    </div>
+    <div style="margin-top:28px;">
+      <a href="Muyiwa_Adeyemi_Portfolio.pdf" download class="download-btn">⬇ Download CV (PDF)</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section>
+  <div class="stats-grid fade-in">
+    <div class="stat-card"><div class="stat-number">11</div><div class="stat-label">Websites Managed</div></div>
+    <div class="stat-card"><div class="stat-number">3+</div><div class="stat-label">LMS &amp; Sites Built</div></div>
+    <div class="stat-card"><div class="stat-number">5+</div><div class="stat-label">Platforms Integrated</div></div>
+    <div class="stat-card"><div class="stat-number">1</div><div class="stat-label">n8n Automation Built</div></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Where I've Worked</div>
+  <h2>Experience</h2>
+
+  <div class="exp-card fade-in">
+    <div class="exp-header">
+      <div class="exp-title">Executive Assistant</div>
+      <div class="exp-badge">Jan 2026 – Present</div>
+    </div>
+    <div class="exp-company">Base XII Studios · Lagos, Nigeria</div>
+
+    <div class="exp-group-title">📋 Project Coordination & Productivity Tools</div>
+    <ul class="exp-bullets">
+      <li>Arranged and coordinated multiple projects across teams using Notion and ClickUp, ensuring tasks were tracked, deadlines met, and progress communicated clearly.</li>
+      <li>Seamlessly adopted and operated a diverse range of tools and software to support business operations, demonstrating strong adaptability and a quick learning curve.</li>
+    </ul>
+
+    <div class="exp-group-title">⚙️ Tech Operations & Systems</div>
+    <ul class="exp-bullets">
+      <li>Monitored 11 company websites via MainWP, tracking plugin/theme updates to ensure zero downtime across all properties.</li>
+      <li>Built an n8n automation workflow to monitor all 11 websites, eliminating hours of manual checking weekly.</li>
+      <li>Managed self-hosted tools on Dokploy — monitored container health and reloaded Docker Compose stacks to restore services.</li>
+      <li>Configured integrations including Postiz, Metabase, Zoho Mail, TikTok API, and Facebook API.</li>
+      <li>Set up group email with Zoho Mail and configured custom forwarding rules for team communications.</li>
+    </ul>
+
+    <div class="exp-group-title">🌐 Web Development & LMS</div>
+    <ul class="exp-bullets">
+      <li>Contributed to setup and configuration of the CIIFA main website.</li>
+      <li>Built the Parthian Partners LMS from scratch, including the full user dashboard.</li>
+      <li>Edited and maintained Tom Godwin's website with regular updates.</li>
+      <li>Go-to technical support for CBA Africa Music classes — uploading modules, classes, and quizzes via SafetyCulture.</li>
+    </ul>
+
+    <div class="exp-group-title">🗂️ Executive & Operational Support</div>
+    <ul class="exp-bullets">
+      <li>Conducted car inspection on behalf of the executive, facilitating a successful vehicle purchase.</li>
+      <li>Carried out a property inspection and provided assessment to support executive decisions.</li>
+      <li>Coordinated full logistics for furniture transport from Maiduguri to Lagos, including last-mile delivery.</li>
+      <li>Handled brand correspondence with Sosa Foods brand manager and a facility security company.</li>
+      <li>Compiled and organised all previous branding assets used to build the Base XII Studios company profile.</li>
+      <li>Coordinated the full XII Gifts order cycle — from initial customer enquiries through to production and successful delivery across multiple locations.</li>
+    </ul>
+  </div>
+
+  <div class="exp-card fade-in">
+    <div class="exp-header">
+      <div class="exp-title">Site Engineer / Supervisor</div>
+      <div class="exp-badge">Jul 2020 – Aug 2022</div>
+    </div>
+    <div class="exp-company">Kharis Engineering Services Limited · Nigeria</div>
+    <ul class="exp-bullets">
+      <li>Supervised construction site operations, ensuring on-time delivery within specification.</li>
+      <li>Managed material sourcing and served as liaison between company and clients.</li>
+      <li>Produced detailed reports and accurately interpreted engineering drawings for site teams.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">What I Bring</div>
+  <h2>Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card fade-in">
+      <div class="skill-card-title"><span class="skill-icon">⚙️</span> Tech & Systems</div>
+      <div class="skill-tags">
+        <span class="skill-tag">n8n Automation</span>
+        <span class="skill-tag">MainWP</span>
+        <span class="skill-tag">Dokploy</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Postiz</span>
+        <span class="skill-tag">Metabase</span>
+        <span class="skill-tag">Zoho Mail</span>
+        <span class="skill-tag">TikTok API</span>
+        <span class="skill-tag">Facebook API</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-title"><span class="skill-icon">🌐</span> Web & LMS</div>
+      <div class="skill-tags">
+        <span class="skill-tag">WordPress</span>
+        <span class="skill-tag">LMS Development</span>
+        <span class="skill-tag">SafetyCulture</span>
+        <span class="skill-tag">Site Maintenance</span>
+        <span class="skill-tag">Content Upload</span>
+        <span class="skill-tag">Plugin Management</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-title"><span class="skill-icon">🗂️</span> Operations & Admin</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Notion</span>
+        <span class="skill-tag">ClickUp</span>
+        <span class="skill-tag">Executive Support</span>
+        <span class="skill-tag">Logistics Coordination</span>
+        <span class="skill-tag">Stakeholder Comms</span>
+        <span class="skill-tag">Document Management</span>
+        <span class="skill-tag">Asset Inspection</span>
+        <span class="skill-tag">Brand Management</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Things I've Built</div>
+  <h2>Notable Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card fade-in">
+      <div class="project-type">Project Management</div>
+      <div class="project-name">Multi-Project Coordination (Notion & ClickUp)</div>
+      <div class="project-desc">Arranged and coordinated multiple concurrent projects using Notion and ClickUp — managing tasks, tracking deadlines, and keeping teams aligned across Base XII's business units.</div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-name">n8n Website Monitor</div>
+      <div class="project-desc">Built a full automation workflow using n8n to continuously monitor all 11 company websites and alert on downtime — eliminating hours of manual checking weekly.</div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-type">LMS Development</div>
+      <div class="project-name">Parthian Partners LMS</div>
+      <div class="project-desc">Built the Parthian Partners Learning Management System from scratch, including the full user dashboard, course structure, and content management.</div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-type">Website</div>
+      <div class="project-name">CIIFA Main Website</div>
+      <div class="project-desc">Contributed to the setup and configuration of the main CIIFA website, handling platform setup and content structure.</div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-type">Platform Integration</div>
+      <div class="project-name">Multi-Platform Integration Suite</div>
+      <div class="project-desc">Configured and connected Postiz, Metabase, TikTok API, Facebook API, and Zoho Mail for Base XII's digital operations stack.</div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-type">Operations</div>
+      <div class="project-name">Maiduguri–Lagos Logistics</div>
+      <div class="project-desc">Coordinated end-to-end furniture transport from Maiduguri to Lagos, managing logistics planning and last-mile delivery to the executive's residence.</div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-type">Brand & Content</div>
+      <div class="project-name">Base XII Company Profile</div>
+      <div class="project-desc">Compiled, organised, and structured all previous branding assets into a cohesive company profile used for official business development.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">Academic Background</div>
+  <h2>Education & Certifications</h2>
+  <div class="edu-grid">
+    <div class="edu-card fade-in">
+      <div class="edu-degree">Bachelor of Engineering</div>
+      <div class="edu-school">University of Ilorin, Nigeria</div>
+      <div class="edu-year">Graduated 2017</div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-degree">Ordinary National Diploma</div>
+      <div class="edu-school">Kwara State Polytechnic, Nigeria</div>
+      <div class="edu-year">Graduated 2011</div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-degree">Google Data Analytics</div>
+      <div class="edu-school">Google / Coursera</div>
+      <div class="edu-year">Professional Certificate</div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-degree">ALXAfrica VA Certification</div>
+      <div class="edu-school">ALXAfrica</div>
+      <div class="edu-year">Virtual Assistant Track</div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-degree">The Data Immersed</div>
+      <div class="edu-school">Data Analytics Certification</div>
+      <div class="edu-year">Professional Certificate</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px;">Muyiwa Adeyemi</p>
+  <p>muyiwaadeyemim@gmail.com &nbsp;·&nbsp; 07031174630 &nbsp;·&nbsp; Lagos, Nigeria</p>
+  <p style="margin-top:12px;font-size:12px;">Built with intention. Open to new opportunities.</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
